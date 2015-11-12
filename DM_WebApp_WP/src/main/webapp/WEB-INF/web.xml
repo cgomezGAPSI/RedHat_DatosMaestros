@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>resteasy.role.based.security</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<servlet-mapping>
+		<servlet-name>javax.ws.rs.core.Application</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Administrador</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Administrador</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Consumidor</web-resource-name>
+			<url-pattern>/consumidor/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Consumidor</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Productor</web-resource-name>
+			<url-pattern>/productor/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Productor</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<!-- auth-method>BASIC</auth-method -->
+		<realm-name>edomex</realm-name>
+		<form-login-config>
+			<form-login-page>/Login.html</form-login-page>
+			<form-error-page>/AccessDenied.html</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-role>
+		<role-name>Consumidor</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Productor</role-name>
+	</security-role>
+	<security-role>
+		<role-name>Administrador</role-name>
+	</security-role>
+
+</web-app>
